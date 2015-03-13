@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody rb;
 	public Boundary boundary;
 	public float tilt;
-	public Text info;
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
@@ -42,10 +41,6 @@ public class PlayerController : MonoBehaviour
 		);
 
 		rb.rotation = Quaternion.Euler (0f, 0f, rb.velocity.x*-tilt);
-
-		info.text = "moveHorizotnal: " + moveHorizotnal.ToString();
-		info.text += "\n rb.velocity.x: " + rb.velocity.x.ToString();
-		info.text += "\n rb.rotation.x: " + rb.rotation.x.ToString();
 	}
 
 	void Update()
@@ -54,6 +49,7 @@ public class PlayerController : MonoBehaviour
 		{
 			nextFire = Time.time + fireRate;
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+			GetComponent<AudioSource>().Play();
 		}
 	}
 }
